@@ -1,5 +1,4 @@
-# Improving performance measurement using pure 
-object - oriented programming
+# Improving performance measurement using pure object - oriented programming
 
 This article is about how to make "**Is elem in array"** by @Анна Штыкова  more readable (more object - oriented to tell the truth).
 
@@ -19,7 +18,8 @@ Now its time to create some class, that can measure time of function execution
 class ExecutionTime implements Measurement {
     private func : Function;
     private args : any[];
-		// unfortunately, idk how to declare type of function parameter's instead of any[]
+
+    // unfortunately, idk how to declare type of function parameter's instead of any[]
     constructor(executedFunction: Function, ...args: any[]) {
         this.func = executedFunction;
         this.args = args;
@@ -96,9 +96,7 @@ Let's find out how much faster an **indexOf** that a **set** realization:
 ```tsx
 let setSingleTime = setCreationTime + executionTimes.setFound.measure();
 
-console.log('IndexOf is' +  
-						`${executionTimes.arrayIndexOf.measure() / setSingleTime} times` +
-						 'faster that set realization');
+console.log(`IndexOf is `${executionTimes.arrayIndexOf.measure() / setSingleTime} times faster that set realization`);
 ```
 
 > IndexOf is 44.999918509420894 times faster that set realization
@@ -107,7 +105,7 @@ As we can see, if the number of searches is small, then **IndexOf** is much fast
 
 ---
 
-Now it remains to answer the last question: what if we have to find value more than one time? For example $n/2$ times in array of length $n$?
+Now it remains to answer the last question: what if we have to find value more than one time? For example n/2 times in array of length n?
 
 ```tsx
 const launches = array.length / 2;
@@ -134,7 +132,7 @@ It means that we always have to estimate the number of searches to decide which 
 1. Introduced **interface Measurement** that can be reused later for every types of measure's
 2. Introduced **class TotalMeasurement** that can be reused to measure lot of "measure" call's
 3. Introduced **class ExecutionTime** that will help us to measure time of function execution
-4. We found out that when amount of searches in array is about $array.lenght/k$ for some positive integer $k$, it's more reasonable to convert it to set.
+4. We found out that when amount of searches in array is about n/k for some positive integer k, it's more reasonable to convert it to set.
 
 ---
 
